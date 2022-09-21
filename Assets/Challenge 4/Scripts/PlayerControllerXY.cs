@@ -7,8 +7,7 @@ public class PlayerControllerXY : MonoBehaviour
     private Rigidbody playerRb;
     private float speed = 500;
     private GameObject focalPoint;
-    private float turboSpeed;
-    private Animation particleAnim;
+    public GameObject speedBooster;
 
     public bool hasPowerup;
     public GameObject powerupIndicator;
@@ -34,8 +33,15 @@ public class PlayerControllerXY : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
+            speed = 1000;
+            speedBooster.GetComponent<ParticleSystem>().Play();
         }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            speed = 500;
+            speedBooster.GetComponent<ParticleSystem>().Stop();
+        }
+        speedBooster.transform.position = transform.position + new Vector3(0, -0.75f, 0);
     }
 
     // If Player collides with powerup, activate powerup
