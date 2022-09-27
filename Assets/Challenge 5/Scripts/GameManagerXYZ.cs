@@ -9,8 +9,10 @@ public class GameManagerXYZ : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI timeText;
     public GameObject titleScreen;
-    public Button restartButton; 
+    public Button restartButton;
+    private float timeRemaining = 60f;
 
     public List<GameObject> targetPrefabs;
 
@@ -85,6 +87,22 @@ public class GameManagerXYZ : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void Update()
+    {
+        if (isGameActive)
+        {
+            if (timeRemaining > 0)
+            {
+                timeText.text = "Time left: " + Mathf.FloorToInt(timeRemaining);
+                timeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                GameOver();
+            }
+        }
     }
 
 }
