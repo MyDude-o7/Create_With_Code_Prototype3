@@ -7,7 +7,7 @@ public class PlayerControllerX : MonoBehaviour
     public bool gameOver = false;
 
     public float floatForce;
-    private float gravityModifier = 1.5f;
+    private float gravityModifier = 5.0f;
     private Rigidbody playerRb;
 
     public ParticleSystem explosionParticle;
@@ -49,7 +49,7 @@ public class PlayerControllerX : MonoBehaviour
         if (transform.position.y < 1)
         {
             playerRb.velocity = new Vector3(0, 0, 0);
-            playerRb.AddForce(Vector3.up * 7, ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * 3, ForceMode.Impulse);
             playerAudio.PlayOneShot(boingSound, 1.0f);
         }
     }
@@ -64,7 +64,7 @@ public class PlayerControllerX : MonoBehaviour
             gameOver = true;
             Debug.Log("Game Over!");
             Destroy(other.gameObject);
-        } 
+        }
 
         // if player collides with money, fireworks
         else if (other.gameObject.CompareTag("Money"))
